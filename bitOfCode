@@ -1,0 +1,29 @@
+import { style } from "./styleItems";
+
+  const [items, setItems] = useState(stateItems);
+  const [contextMenu, setContexMenu] = useState({ visible: false, x: 0, y: 0 });
+  const [clientCount, setclientCount] = useState(15);
+
+  // the id of the combo that has been right-clicked on
+  const [groupSelected, setGroupSelected] = useState(null);
+
+ const addClientToGroup = () => {
+    const newItem = {
+      ...style.client,
+      data: {
+        row: 2,
+        level: 2,
+        group: groupSelected,
+        name: `client ${clientCount + 1}`,
+      },
+    };
+    setItems({ ...items, ["client" + clientCount + 1]: newItem });
+    setclientCount(clientCount + 1);
+    hideContextMenu();
+  };
+const hideContextMenu = () => {
+    if (contextMenu.visible) {
+      setContexMenu({ visible: false, x: 0, y: 0 });
+    }
+  };
+
